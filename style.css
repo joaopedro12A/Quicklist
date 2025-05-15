@@ -167,7 +167,7 @@ main {
 }
 
 .warning {
-    background: var(--color-dangerW);
+    background: var(--color-danger);
     color: var(--always-white);
     padding: 1.2rem;
     display: flex;
@@ -199,4 +199,27 @@ main {
 .hide-warning {
     opacity: 0;
     transform: translateY(-10px);
+}
+
+@media(min-width: 627px) {
+    header {
+        img {
+            margin-bottom: 6.4rem;
+        }
+    }
+
+    .add-item {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 1.6rem;
+
+        input {
+            margin-bottom: 0;
+            grid-column: 1 / 8;
+        }
+
+        button {
+            grid-column: 8 / 11;
+        }
+    }
 }
