@@ -1,59 +1,47 @@
-const items = []
+const itemInput = document.getElementById("item");
+const listSection = document.querySelector(".list");
+const warningBox = document.querySelector(".warning");
+const closeWarningBtn = warningBox.querySelector("button");
 
 function addItem() {
-    const itemName = document.querySelector("item").ariaValueMax
+  const itemValue = itemInput.value.trim();
+  if (itemValue === "") return;
 
-    const item = {
-        name: itemName,
-        checked: false
-    }
+  const item = document.createElement("div");
+  item.classList.add("item");
 
-    items.push(item)
+  item.innerHTML = `
+    <div>
+      <input type="checkbox" id="check-${itemValue}">
+      <label for="check-${itemValue}">
+        <span class="custom-checkbox"></span>
+        ${itemValue}
+      </label>
+    </div>
+    <button class="delete-btn">
+      <img src="./assets/trash-icon.svg" alt="Deletar">
+    </button>
+  `;
 
-    document.querySelector("item").value = ""
+  // Adiciona evento ao botão de deletar
+  item.querySelector(".delete-btn").addEventListener("click", () => {
+    item.remove();
+    showWarning();
+  });
 
-    showItemsList()
+  listSection.appendChild(item);
+  itemInput.value = "";
 }
 
-function showItemsList() { 
-     const sectionList = document.querySelector(".list")
+function showWarning() {
+  warningBox.classList.remove("hide-warning");
+  clearTimeout(warningBox.timeout);
 
-     sectionList.innerHTML = ""
-
-     items.sort((itemA, itemB)) => Number(itemA.checked) - number (itemB.checked)
-
-     items.map((item, index) => {
-        sectionList.innerHTML += `
-         <div class="item">
-                <div>
-                    <input type="checkbox" name="list" id="item-${index}">
-                    <div class="custom-checkbox">
-                       <img src="./assets/checked.svg" alt="checkend"> 
-                    </div>
-                    <label for="item-2">Café</label>
-                </div>
-                <button>
-                    <img src="./assets/trash-icon.svg" alt="trash icon">
-                </button>
-            </div>
-            <div class="item">
-                <div>
-                    <input type="checkbox" name="list" id="item-3">
-                    <div class="custom-checkbox">
-                       <img src="./assets/checked.svg" alt="checkend"> 
-                    </div>
-                    <label for="item-${index}">${item.name}</label>
-                </div>
-                <button>
-                    <img src="./assets/trash-icon.svg" alt="trash icon">
-                </button>
-            </div>
-        `
-     })
+  warningBox.timeout = setTimeout(() => {
+    warningBox.classList.add("hide-warning");
+  }, 3000); // Oculta após 3 segundos
 }
 
-function checkItem(itemName) {
-    const item = items.find((item) => item.name === itemName)
-    item.checked = !item.checked
-    showItemsList()
-}
+closeWarningBtn.addEventListener("click", () => {
+  warningBox.classList.add("hide-warning");
+});
