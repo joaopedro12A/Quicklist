@@ -23,7 +23,7 @@ function addItem() {
     </button>
   `;
 
-  // Adiciona evento ao botão de deletar
+  
   item.querySelector(".delete-btn").addEventListener("click", () => {
     item.remove();
     showWarning();
