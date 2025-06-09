@@ -39,7 +39,7 @@ function showWarning() {
 
   warningBox.timeout = setTimeout(() => {
     warningBox.classList.add("hide-warning");
-  }, 3000); // Oculta após 3 segundos
+  }, 3000); 
 }
 
 closeWarningBtn.addEventListener("click", () => {
