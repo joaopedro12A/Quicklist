@@ -22,7 +22,6 @@ function addItem() {
       <img src="./assets/trash-icon.svg" alt="Deletar">
     </button>
   `;
-
   
   item.querySelector(".delete-btn").addEventListener("click", () => {
     item.remove();
